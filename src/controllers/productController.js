@@ -1,5 +1,4 @@
 import Product from "../models/product.js";
-import mongoose from "mongoose";
 
 
 /**
@@ -108,8 +107,13 @@ export const updateProduct = async (req, res) => {
 
 }
 
+/**
+ * Delete Product
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 
-//Delete Product
 export const deleteSpecificProduct = async (req, res) => {
   console.log("req.params", req.params);
   try {
@@ -129,6 +133,13 @@ export const deleteSpecificProduct = async (req, res) => {
       .json({ message: "Error deleting Product", error: error.message });
   }
 }
+
+/**
+ * Update Product Quantity
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 
 export const updateProductQuantity = async (req, res) => {
   try {
@@ -161,6 +172,13 @@ export const updateProductQuantity = async (req, res) => {
   }
 };
 
+
+/**
+ * Check Product Quantity
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 export const checkProductQuantity = async (req, res) => {
   try {
     
@@ -179,7 +197,6 @@ export const checkProductQuantity = async (req, res) => {
     }
 
     const currentQuantity = product.quantity;
-
 
     console.log("givenQuantity", givenQuantity);
     console.log("currentQuantity:", currentQuantity);
