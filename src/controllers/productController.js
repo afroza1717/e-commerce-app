@@ -165,7 +165,6 @@ export const checkProductQuantity = async (req, res) => {
   try {
     
     //DOCS: https://mongoosejs.com/docs/api/model.html#Model.findOne()
-    //const productId = req.params.id;
 
     const {id, givenQuantity} = req.params; 
 
