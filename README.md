@@ -1,6 +1,26 @@
 # Product API  
 
-This API provides endpoints for managing products in a database using MongoDB and Mongoose. It includes operations for creating, retrieving, updating, deleting, and checking product quantity.  
+## **Project Purpose & Overview**  
+This project is designed to provide a robust API for managing e-commerce products using MongoDB and Mongoose. It supports CRUD operations on products, product category and includes user authentication via JWT for secure access. The API enables efficient e-commerce management by allowing users to create, retrieve, update, and delete products while ensuring data consistency and security.  
+
+---
+
+## **Current Progress**  
+- Implemented core CRUD operations for products.  
+- Implemented core CRUD operations for products category. 
+- Added user authentication with JWT for secure access.  
+- Included product quantity management and availability checks.  
+- API is functional and can be tested via Postman or an integrated frontend.  
+
+---
+
+## **Next Steps for Project Completion**  
+- Implement Product adding option for Product Type, Product Cart.  
+- Creating, Updating the Product Cart.  
+- Adding product search APIs.  
+- Adding Payment Integration System.
+- Implemented Back-End and Front-End Integration for the e-commerce app.   
+  
 
 ---
 
@@ -27,7 +47,7 @@ This API provides endpoints for managing products in a database using MongoDB an
 
 4. **Run the Server:**  
    ```sh
-   npm run dev
+   npm start
    ```
    The API will be available at `http://localhost:5000`.
 
@@ -170,7 +190,3 @@ This API provides user authentication using JWT (JSON Web Token). Users can regi
 
 ## **Author**  
 Developed by **[Syeda Afroza Hossain]**.  
-
-## **License**  
-This project is open-source and available under the MIT License.
-
