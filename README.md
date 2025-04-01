@@ -169,7 +169,7 @@ This API provides user authentication using JWT (JSON Web Token). Users can regi
 ---
 
 ## **Author**  
-Developed by **[Your Name]**.  
+Developed by **[Syeda Afroza Hossain]**.  
 
 ## **License**  
 This project is open-source and available under the MIT License.
