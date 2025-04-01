@@ -1,7 +1,3 @@
-# e-commerce-app
-
-📌 Installation & Setup
-
 # Product API  
 
 This API provides endpoints for managing products in a database using MongoDB and Mongoose. It includes operations for creating, retrieving, updating, deleting, and checking product quantity.  
@@ -25,14 +21,15 @@ This API provides endpoints for managing products in a database using MongoDB an
    Create a `.env` file and add your database connection string:  
    ```env
    MONGO_URI=your_mongodb_connection_string
-   PORT=3000
+   PORT=5000
+   JWT_SECRET=your_jwt_secret
    ```
 
 4. **Run the Server:**  
    ```sh
    npm run dev
    ```
-   The API will be available at `http://localhost:3000`.
+   The API will be available at `http://localhost:5000`.
 
 ---
 
@@ -45,6 +42,7 @@ This API provides endpoints for managing products in a database using MongoDB an
   ```json
   [
     {
+      "_id": "660b8f",
       "product_id": "101",
       "productName": "Laptop",
       "quantity": 50,
@@ -68,6 +66,7 @@ This API provides endpoints for managing products in a database using MongoDB an
 - **Response:**  
   ```json
   {
+    "_id": "660b8f",
     "product_id": "101",
     "productName": "Laptop",
     "quantity": 50,
@@ -112,119 +111,66 @@ This API provides endpoints for managing products in a database using MongoDB an
 
 ---
 
-### **4. Update Product**  
-**PUT** `/api/products/:id`  
-- **Description:** Updates a product's details.  
-- **Example Request:**  
-  ```sh
-  PUT /api/products/102
-  ```
+### **4. User Authentication (JWT)**  
+
+This API provides user authentication using JWT (JSON Web Token). Users can register and log in to obtain a token for secure access.
+
+#### **Register User**  
+**POST** `/api/auth/register`  
+- **Description:** Registers a new user.  
 - **Request Body:**  
   ```json
   {
-    "productName": "Updated Smartphone",
-    "quantity": 80
+    "username": "johndoe",
+    "email": "johndoe@example.com",
+    "password": "securepassword"
   }
   ```
 - **Response:**  
   ```json
   {
-    "_id": "661b9f",
-    "product_id": "102",
-    "productName": "Updated Smartphone",
-    "quantity": 80,
-    "price": 700
+    "message": "User registered successfully"
   }
   ```
 - **Status Codes:**  
-  - `200 OK` - Successfully updated.  
-  - `404 Not Found` - Product does not exist.  
-  - `500 Internal Server Error` - Database update failed.  
+  - `201 Created` - User registered successfully.  
+  - `400 Bad Request` - Invalid input.  
 
----
-
-### **5. Delete Product**  
-**DELETE** `/api/products/:id`  
-- **Description:** Deletes a product.  
-- **Example Request:**  
-  ```sh
-  DELETE /api/products/102
-  ```
-- **Response:**  
-  ```json
-  {
-    "message": "Product deleted successfully"
-  }
-  ```
-- **Status Codes:**  
-  - `200 OK` - Successfully deleted.  
-  - `404 Not Found` - Product does not exist.  
-  - `500 Internal Server Error` - Query failed.  
-
----
-
-### **6. Update Product Quantity**  
-**PATCH** `/api/products/:id/quantity`  
-- **Description:** Updates the stock quantity of a product.  
+#### **Login User**  
+**POST** `/api/auth/login`  
+- **Description:** Logs in a user and returns a JWT token.  
 - **Request Body:**  
   ```json
   {
-    "quantity": 90
+    "email": "johndoe@example.com",
+    "password": "securepassword"
   }
   ```
 - **Response:**  
   ```json
   {
-    "product_id": "102",
-    "productName": "Updated Smartphone",
-    "quantity": 90,
-    "price": 700
+    "token": "your_jwt_token"
   }
   ```
 - **Status Codes:**  
-  - `200 OK` - Quantity updated.  
-  - `404 Not Found` - Product does not exist.  
-  - `500 Internal Server Error` - Query failed.  
-
----
-
-### **7. Check Product Quantity**  
-**GET** `/api/products/checkProductQuantity/:id/:givenQuantity`  
-- **Description:** Checks if the given quantity is available in stock.  
-- **Example Request:**  
-  ```sh
-  GET /api/products/102/check/50
-  ```
-- **Response (if quantity is available):**  
-  ```json
-  {
-    "message": "Products Available"
-  }
-  ```
-- **Response (if quantity is not available):**  
-  ```json
-  {
-    "message": "Products Unavailable, Given quantity is greater than Total quantity"
-  }
-  ```
-- **Status Codes:**  
-  - `200 OK` - Sufficient quantity available.  
-  - `404 Not Found` - Product does not exist or insufficient stock.  
-  - `500 Internal Server Error` - Query failed.  
+  - `200 OK` - Successfully logged in.  
+  - `401 Unauthorized` - Invalid credentials.  
+  - `500 Internal Server Error` - Server error.  
 
 ---
 
 ## **Technologies Used**  
 - **Node.js** - Server-side JavaScript runtime.  
 - **Express.js** - Web framework for Node.js.  
-- **MongoDB** - NoSQL database for storing products.  
+- **MongoDB** - NoSQL database for storing products and users.  
 - **Mongoose** - ODM for MongoDB.  
+- **JWT** - Authentication and authorization using JSON Web Token.  
 
 ---
 
 ## **Author**  
-Developed by **[Syeda Afroza Hossain]**.  
+Developed by **[Your Name]**.  
 
 ## **License**  
-This project is open-source.
+This project is open-source and available under the MIT License.
 
