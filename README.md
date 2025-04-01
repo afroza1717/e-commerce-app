@@ -30,7 +30,7 @@ This API provides endpoints for managing products in a database using MongoDB an
 
 4. **Run the Server:**  
    ```sh
-   npm start
+   npm run dev
    ```
    The API will be available at `http://localhost:3000`.
 
