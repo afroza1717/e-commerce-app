@@ -7,7 +7,7 @@ import passport from 'passport';
 import passportConfig from './config/passport.js'; 
 
 import productRouter from './routes/productRoute.js';
-//import userProductRouter from './routes/userProductRoute.js';
+import productCategoryRouter from './routes/productCategoryRouter.js';
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.use(passport.initialize());
 
 app.use("/api/products/", productRouter)
 
-//app.use("/api/userProduct/", userProductRouter)
+app.use("/api/productCategory/", productCategoryRouter)
 
 
 app.use('/api/auth', AuthRouter)

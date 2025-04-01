@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 
-// Define Movie Schema
+// Define Product Category Schema
 //DOCS: https://mongoosejs.com/docs/api/schema.html#Schema()
 //DOCS: https://www.npmjs.com/package/uuid
 const productCategorySchema = new mongoose.Schema({
@@ -32,6 +32,6 @@ const productCategorySchema = new mongoose.Schema({
 );
 
 //Define or create collections
-const movie = mongoose.model("Movie", movieSchema);
+const productCategory = mongoose.model("Movie", productCategorySchema);
 
-export default movie;
+export default productCategory;

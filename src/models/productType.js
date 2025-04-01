@@ -1,44 +1,19 @@
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 
-//Define Product Schema
+// Define Product TYpe Schema
 //DOCS: https://mongoosejs.com/docs/api/schema.html#Schema()
 //DOCS: https://www.npmjs.com/package/uuid
-const productSchema = new mongoose.Schema({
-    product_id: {
+
+const productTypeSchema = new mongoose.Schema({
+    product_type_id: {
         type: String,
         default: uuidv4, // Automatically generate a UUID when a new task is created
         unique: true,
     },
 
-    productName: {
+    productTypeName: {
         type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    color: {
-        type: String,
-        required: true
-    },
-    productCategory_id: {
-        type: String,
-        ref: 'ProductCategory'
-    },
-
-    supplierName: {
-        type: String
-    }, 
-
-    productType: {
-        type: String,
-        ref: 'ProductType'
-    },
-
-    quantity: {
-        type: Number,
         required: true
     }
 
@@ -58,6 +33,6 @@ const productSchema = new mongoose.Schema({
 );
 
 //Define or create collections
-const product = mongoose.model("Product", productSchema);
+const productType = mongoose.model("ProductType", productTypeSchema);
 
-export default product;
+export default productType;
