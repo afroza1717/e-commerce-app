@@ -13,6 +13,7 @@ import cartDetailsRouter from './routes/cartDetailsRoute.js';
 import checkoutRouter from './routes/checkoutRoute.js';
 import paymentRouter from './routes/paymentRoute.js';
 import paymentTypeRouter from './routes/paymentTypeRoute.js';
+import stripeRouter from './routes/stripeRoute.js';
 
 
 const app = express();
@@ -43,6 +44,8 @@ app.use("/api/checkout/", checkoutRouter);
 app.use("/api/payment/", paymentRouter);
 
 app.use("/api/paymentType/", paymentTypeRouter);
+
+app.use("/api/stripe/", stripeRouter);
 
 app.use('/api/auth', AuthRouter)
 
