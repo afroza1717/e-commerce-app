@@ -12,7 +12,7 @@ export const getProductCategoryList = async (req, res) => {
     const productCategoryList = await ProductCategory.find();
     console.log("ProductCategory List::", productCategoryList);
     res.status(200).json(productCategoryList);
-  
+
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
@@ -62,17 +62,17 @@ export const createProductCategory = async (req, res) => {
     //DOCS: https://mongoosejs.com/docs/api/document.html#Document.prototype.save()
     const savedProductCategory = await newProductCategory.save();
     console.log("Created productCategory =>", savedProductCategory);
-    res.status(201).json(savedProductCategory);
+
+    res.status(201).json({
+      message: 'ProductCategory Created Successfully.',
+      data: savedProductCategory
+    })
   } catch (error) {
     res
       .status(400)
       .json({ message: "Error creating ProductCategory", error: error.message });
   }
 
-  res.status(201).json({
-    message: 'ProductCategory Created Successfully.',
-    data: savedProductCategory
-  })
 }
 
 
@@ -120,7 +120,7 @@ export const deleteSpecificProductCategory = async (req, res) => {
     const deletedProductCategory = await ProductCategory.findOneAndDelete({
       product_category_id: req.params.id,
     });
-    
+
     if (!deletedProductCategory) {
       return res.status(404).json({ message: "ProductCategory not found" });
     }

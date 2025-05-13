@@ -1,51 +1,64 @@
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 
+//Checkout (id, cart_id, address_type[Billing, Shipping], 
+//country, city, state, zipCode)
 
-//Define Product Schema
+
+//Define Checkout Schema
 //DOCS: https://mongoosejs.com/docs/api/schema.html#Schema()
 //DOCS: https://www.npmjs.com/package/uuid
-const productSchema = new mongoose.Schema({
-    product_id: {
+const checkoutSchema = new mongoose.Schema({
+    checkout_id: {
         type: String,
-        default: uuidv4, // Automatically generate a UUID when a new task is created
+        default: uuidv4, // Automatically generate a UUID when a new Object is created
         unique: true,
     },
 
-    productName: {
+    cart_id: {
         type: String,
-        required: true
+        ref: 'Cart'
     },
-    price: {
-        type: Number,
-        required: true
-    },
-    color: {
+
+    address_type: {
         type: String,
         required: true
     },
 
-    productCategory_id: {
+    address: {
         type: String,
-        ref: 'ProductCategory',
-        required: true,
-    },
-
-    supplierName: {
-        type: String
-    },
-
-    productType: {
-        type: String,
-        ref: 'ProductType'
-    },
-
-    quantity: {
-        type: Number,
         required: true
+    },
+
+    country: {
+        type: String,
+        required: true
+    },
+
+    city: {
+        type: String,
+        required: true
+    },
+
+    state: {
+        type: String,
+        required: true
+    },
+
+    zip_code: {
+        type: String,
+        required: true
+    },
+
+    apartment: {
+        type: String,
+        required: true
+    },
+
+    checkout_status: {
+        type: String,
+        default: "in_progress"
     }
-
-
 },
     {
         timestamps: true,
@@ -60,7 +73,10 @@ const productSchema = new mongoose.Schema({
 
 );
 
-//Define or create collections
-const product = mongoose.model("Product", productSchema);
 
-export default product;
+//Define or create collections
+const checkout = mongoose.model("Checkout", checkoutSchema);
+
+export default checkout;
+
+

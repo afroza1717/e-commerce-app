@@ -1,51 +1,44 @@
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 
-
-//Define Product Schema
+//Define Checkout Schema
 //DOCS: https://mongoosejs.com/docs/api/schema.html#Schema()
 //DOCS: https://www.npmjs.com/package/uuid
-const productSchema = new mongoose.Schema({
-    product_id: {
+const paymentSchema = new mongoose.Schema({
+    payment_id: {
         type: String,
-        default: uuidv4, // Automatically generate a UUID when a new task is created
+        default: uuidv4, // Automatically generate a UUID when a new Object is created
         unique: true,
     },
 
-    productName: {
+    checkout_id: {
         type: String,
+        ref: 'Checkout'
+    },
+
+    payment_type: {
+        type: String,
+        ref: 'Payment_Type',
         required: true
     },
-    price: {
-        type: Number,
-        required: true
-    },
-    color: {
+
+    transaction_external_no: {
         type: String,
         required: true
     },
 
-    productCategory_id: {
-        type: String,
-        ref: 'ProductCategory',
-        required: true,
-    },
-
-    supplierName: {
+    bank_name: {
         type: String
     },
 
-    productType: {
-        type: String,
-        ref: 'ProductType'
+    total_amount: {
+        type: mongoose.Decimal128
     },
 
-    quantity: {
-        type: Number,
-        required: true
+    payment_status: {
+        type: String,
+        default: "in_progress"
     }
-
-
 },
     {
         timestamps: true,
@@ -57,10 +50,11 @@ const productSchema = new mongoose.Schema({
             },
         },
     }
-
 );
 
 //Define or create collections
-const product = mongoose.model("Product", productSchema);
+const payment = mongoose.model("Payment", paymentSchema);
 
-export default product;
+export default payment;
+
+

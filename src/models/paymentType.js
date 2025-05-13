@@ -1,20 +1,20 @@
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 
-// Define Product Category Schema
+// Define PaymentType Schema
 //DOCS: https://mongoosejs.com/docs/api/schema.html#Schema()
 //DOCS: https://www.npmjs.com/package/uuid
-const productCategorySchema = new mongoose.Schema({
-  product_category_id: {
+
+const paymentTypeSchema = new mongoose.Schema({
+  product_type_id: {
     type: String,
     default: uuidv4, // Automatically generate a UUID when a new task is created
     unique: true,
   },
 
-  productCategoryName: {
+  payment_type_name: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   }
 
 
@@ -33,6 +33,6 @@ const productCategorySchema = new mongoose.Schema({
 );
 
 //Define or create collections
-const productCategory = mongoose.model("ProductCategory", productCategorySchema);
+const paymentType = mongoose.model("PaymentType", paymentTypeSchema);
 
-export default productCategory;
+export default paymentType;

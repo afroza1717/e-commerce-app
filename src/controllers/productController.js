@@ -1,5 +1,5 @@
 import Product from "../models/product.js";
-
+import ProductCategory from "../models/productCategory.js";
 
 /**
  * Getting Product List
@@ -51,8 +51,10 @@ export const getProductById = async (req, res) => {
  */
 
 export const createProduct = async (req, res) => {
+  var savedProduct = null;
   try {
     const newProduct = new Product(req.body);
+
     console.log("newProduct product =>", newProduct);
     if (!newProduct.productName) {
       return res.status(400).json({
@@ -60,20 +62,32 @@ export const createProduct = async (req, res) => {
       })
     }
 
-    //DOCS: https://mongoosejs.com/docs/api/document.html#Document.prototype.save()
-    const savedProduct = await newProduct.save();
-    console.log("Created product =>", savedProduct);
-    res.status(201).json(savedProduct);
+    const producCategoryId = newProduct.productCategory_id;
+
+    const productCategory = await ProductCategory.findOne({ product_category_id: producCategoryId });
+    console.log("Get ProductCategory =>", productCategory);
+
+    if (productCategory == null) {
+      return res.status(400).json({
+        message: "Invalid Product Category"
+      });
+    } else {
+      //DOCS: https://mongoosejs.com/docs/api/document.html#Document.prototype.save()
+      savedProduct = await newProduct.save();
+      console.log("Created product =>", savedProduct);
+
+      res.status(201).json({
+        message: 'Product Created Successfully.',
+        data: savedProduct
+      })
+    }
   } catch (error) {
     res
       .status(400)
       .json({ message: "Error creating Product", error: error.message });
   }
 
-  res.status(201).json({
-    message: 'Product Created Successfully.',
-    data: savedProduct
-  })
+
 }
 
 
@@ -121,7 +135,7 @@ export const deleteSpecificProduct = async (req, res) => {
     const deletedProduct = await Product.findOneAndDelete({
       product_id: req.params.id,
     });
-    
+
     if (!deletedProduct) {
       return res.status(404).json({ message: "Product not found" });
     }
@@ -143,10 +157,10 @@ export const deleteSpecificProduct = async (req, res) => {
 
 export const updateProductQuantity = async (req, res) => {
   try {
-    
+
     //DOCS: https://mongoosejs.com/docs/api/model.html#Model.findOne()
     const productId = req.params.id;
-    console.log("Product Id to change Quantity:", productId); 
+    console.log("Product Id to change Quantity:", productId);
 
     const product = await Product.findOne({ product_id: productId });
     console.log("Product for update => ", product);
@@ -181,13 +195,13 @@ export const updateProductQuantity = async (req, res) => {
  */
 export const checkProductQuantity = async (req, res) => {
   try {
-    
+
     //DOCS: https://mongoosejs.com/docs/api/model.html#Model.findOne()
 
-    const {id, givenQuantity} = req.params; 
+    const { id, givenQuantity } = req.params;
 
-    console.log("Product Id to change Quantity:", id); 
-    console.log("Given Quantity:", givenQuantity); 
+    console.log("Product Id to change Quantity:", id);
+    console.log("Given Quantity:", givenQuantity);
 
     const product = await Product.findOne({ product_id: id });
     console.log("Product for update => ", product);
@@ -211,3 +225,4 @@ export const checkProductQuantity = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
+

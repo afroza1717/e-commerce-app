@@ -1,6 +1,9 @@
 import express from "express";
-import { createProduct, getProduct, getProductById, updateProduct,
-    updateProductQuantity, checkProductQuantity } from "../controllers/productController.js";
+import {
+    createProduct, getProduct, getProductById, updateProduct,
+    updateProductQuantity, checkProductQuantity} from "../controllers/productController.js";
+
+import {searchProductByName, searchProductByCategoryName} from "../controllers/searchController.js" 
 
 import { deleteSpecificProduct } from "../controllers/productController.js";
 import { AuthGuard } from "../middleware/authMiddleware.js";
@@ -21,5 +24,9 @@ productRouter.put('/updateProductQuantity/:id', AuthGuard, updateProductQuantity
 productRouter.get('/checkProductQuantity/:id/:givenQuantity', AuthGuard, checkProductQuantity); //Check Product Quantity
 
 productRouter.delete('/:id', AuthGuard, deleteSpecificProduct);
+
+productRouter.post('/searchProductByName', searchProductByName);
+
+productRouter.post('/searchProductByCategoryName', searchProductByCategoryName);
 
 export default productRouter;

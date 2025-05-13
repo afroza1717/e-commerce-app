@@ -2,50 +2,39 @@ import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 
 
-//Define Product Schema
+//Cart (id,  user_id, purchase_date, discount)
+
+
+//Define Cart Schema
 //DOCS: https://mongoosejs.com/docs/api/schema.html#Schema()
 //DOCS: https://www.npmjs.com/package/uuid
-const productSchema = new mongoose.Schema({
-    product_id: {
+const cartSchema = new mongoose.Schema({
+    cart_id: {
         type: String,
         default: uuidv4, // Automatically generate a UUID when a new task is created
         unique: true,
     },
 
-    productName: {
+    user_id: {
         type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    color: {
-        type: String,
+        ref: 'User',
         required: true
     },
 
-    productCategory_id: {
-        type: String,
-        ref: 'ProductCategory',
-        required: true,
-    },
-
-    supplierName: {
-        type: String
-    },
-
-    productType: {
-        type: String,
-        ref: 'ProductType'
-    },
-
-    quantity: {
-        type: Number,
+    purchase_date: {
+        type: Date,
         required: true
+    },
+
+    discount: {
+        type: mongoose.Decimal128
+
+    },
+
+    cart_status: {
+        type: String,
+        default: "in_progress"
     }
-
-
 },
     {
         timestamps: true,
@@ -61,6 +50,6 @@ const productSchema = new mongoose.Schema({
 );
 
 //Define or create collections
-const product = mongoose.model("Product", productSchema);
+const cart = mongoose.model("Cart", cartSchema);
 
-export default product;
+export default cart;

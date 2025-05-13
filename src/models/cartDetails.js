@@ -1,51 +1,41 @@
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
+import Cart from './cart.js';
+
+//CartDetails (id, cart_id, product_id, current_price, quantity)
 
 
-//Define Product Schema
+//Define Card_Details Schema
 //DOCS: https://mongoosejs.com/docs/api/schema.html#Schema()
 //DOCS: https://www.npmjs.com/package/uuid
-const productSchema = new mongoose.Schema({
-    product_id: {
+const cartDetailsSchema = new mongoose.Schema({
+    cart_details_id: {
         type: String,
-        default: uuidv4, // Automatically generate a UUID when a new task is created
+        default: uuidv4, // Automatically generate a UUID when a new Object is created
         unique: true,
     },
 
-    productName: {
+    cart_id: {
         type: String,
-        required: true
+        ref: 'Cart'
     },
-    price: {
+
+    product_id: {
+        type: String,
+        ref: 'Product'
+    },
+
+
+    current_price: {
         type: Number,
         required: true
     },
-    color: {
-        type: String,
-        required: true
-    },
 
-    productCategory_id: {
-        type: String,
-        ref: 'ProductCategory',
-        required: true,
-    },
-
-    supplierName: {
-        type: String
-    },
-
-    productType: {
-        type: String,
-        ref: 'ProductType'
-    },
 
     quantity: {
         type: Number,
         required: true
     }
-
-
 },
     {
         timestamps: true,
@@ -60,7 +50,10 @@ const productSchema = new mongoose.Schema({
 
 );
 
-//Define or create collections
-const product = mongoose.model("Product", productSchema);
 
-export default product;
+//Define or create collections
+const cartDetails = mongoose.model("cartDetails", cartDetailsSchema);
+
+export default cartDetails;
+
+
