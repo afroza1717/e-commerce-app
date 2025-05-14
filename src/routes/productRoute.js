@@ -1,9 +1,13 @@
 import express from "express";
 import {
     createProduct, getProduct, getProductById, updateProduct,
-    updateProductQuantity, checkProductQuantity} from "../controllers/productController.js";
+    updateProductQuantity, checkProductQuantity
+} from "../controllers/productController.js";
 
-import {searchProductByName, searchProductByCategoryName} from "../controllers/searchController.js" 
+import {
+    searchProductByName, searchProductByCategoryName, searchProductByColour,
+    searchProductByNameAndPriceRange
+} from "../controllers/searchController.js"
 
 import { deleteSpecificProduct } from "../controllers/productController.js";
 import { AuthGuard } from "../middleware/authMiddleware.js";
@@ -27,6 +31,10 @@ productRouter.delete('/:id', AuthGuard, deleteSpecificProduct);
 
 productRouter.post('/searchProductByName', searchProductByName);
 
+productRouter.post('/searchProductByColour', searchProductByColour);
+
 productRouter.post('/searchProductByCategoryName', searchProductByCategoryName);
+
+productRouter.post('/searchProductByColourAndPriceRange', searchProductByNameAndPriceRange);
 
 export default productRouter;

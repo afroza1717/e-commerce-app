@@ -30,6 +30,60 @@ export const searchProductByName = async (req, res) => {
     }
 };
 
+export const searchProductByNameAndPriceRange = async (req, res) => {
+    try {
+
+        //DOCS: https://mongoosejs.com/docs/api/model.html#Model.find()
+        const { productName, minPrice, maxPrice } = req.body;
+        console.log("Product Serach Param: ", req.body);
+
+        const productList = await Product.find({
+            $and: [
+                { price: { $gt: minPrice } },
+                { price: { $lt: maxPrice } },
+                { productName: { $regex: productName, $options: 'i' } }
+            ]
+        }
+        );
+
+        if (!productList) {
+            return res.status(400).json({
+                message: "NO Such Product of this price range"
+            })
+        }
+
+        console.log("Matched Product List => ", productList);
+
+        res.status(200).json(productList);
+    } catch (error) {
+        res.status(400).json({ message: "Error Searching Product", error: error.message });
+    }
+};
+
+export const searchProductByColour = async (req, res) => {
+    try {
+
+        //DOCS: https://mongoosejs.com/docs/api/model.html#Model.findOne()
+        const color = req.body.color;
+        console.log("Product Serach Param: ", color);
+
+        const productList = await Product.find({ color: { $regex: color, $options: 'i' } });
+
+        if (!productList) {
+            return res.status(400).json({
+                message: "NO Such Color Product"
+            })
+        }
+
+        console.log("Matched Product List => ", productList);
+
+        res.status(200).json(productList);
+    } catch (error) {
+        res.status(400).json({ message: "Error Searching Product", error: error.message });
+    }
+};
+
+
 export const searchProductByCategoryName = async (req, res) => {
     try {
 
