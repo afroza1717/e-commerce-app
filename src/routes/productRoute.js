@@ -35,6 +35,6 @@ productRouter.post('/searchProductByColour', searchProductByColour);
 
 productRouter.post('/searchProductByCategoryName', searchProductByCategoryName);
 
-productRouter.post('/searchProductByColourAndPriceRange', searchProductByNameAndPriceRange);
+productRouter.post('/searchProductByNameAndPriceRange', searchProductByNameAndPriceRange);
 
 export default productRouter;
