@@ -298,7 +298,7 @@ export const getTotalWithDiscountByCartId = async (req, res) => {
         console.log("Total Cost (with Discount) for given Cart =>", cart_id, total);
 
         res.status(201).json({
-            message: 'Total Cost (discount applied if any) for this Cart: ',
+            message: 'Total Cost (discount applied if any) for this Cart: ' + discount + "%",
             data: total.toFixed(4)
         })
     } catch (error) {
