@@ -14,7 +14,7 @@ const productCategorySchema = new mongoose.Schema({
   productCategoryName: {
     type: String,
     required: true,
-    unique: true
+    unique: [true, 'Already exist']
   }
 
 
