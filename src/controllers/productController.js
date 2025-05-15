@@ -63,7 +63,11 @@ export const createProduct = async (req, res) => {
     }
 
     const producCategoryId = newProduct.productCategory_id;
-
+    if (!producCategoryId) {
+      return res.status(400).json({
+        message: "Product Category is required"
+      });
+    }
     const productCategory = await ProductCategory.findOne({ product_category_id: producCategoryId });
     console.log("Get ProductCategory =>", productCategory);
 

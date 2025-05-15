@@ -258,7 +258,7 @@ export const getSubTotalCostByCartId = async (req, res) => {
 
         res.status(201).json({
             message: 'Sub Total for this Cart: ',
-            data: subTotal
+            subTotal: subTotal + '$'
         })
     } catch (error) {
         console.error("Error fetching Sub Total:", error);
@@ -293,13 +293,13 @@ export const getTotalWithDiscountByCartId = async (req, res) => {
         console.log("Getting SubTotal for given Cart =>", cart_id, subTotal);
 
         const cart = await Cart.findOne({ cart_id: cart_id });
-        const discount = cart.discount;
+        const discount = cart.discount ? cart.discount : 0.0;
         const total = subTotal * (1 - discount / 100);
         console.log("Total Cost (with Discount) for given Cart =>", cart_id, total);
 
         res.status(201).json({
-            message: 'Total Cost (discount applied if any) for this Cart: ' + discount + "%",
-            data: total.toFixed(4)
+            message: 'Total Cost for this Cart: applied discount(if any): ' + discount + "%",
+            Total: total.toFixed(2) + "$"
         })
     } catch (error) {
         console.error("Error fetching Total:", error);

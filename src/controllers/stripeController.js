@@ -38,7 +38,7 @@ export const getCheckoutSessionStripe = async (req, res) => {
         });
 
         res.status(201).json({
-            message: 'Stripe Checkout Completed Successfully.',
+            message: 'Please follow the link below to complete the checkout ann payment process.',
             data: session
         });
 
